@@ -614,3 +614,44 @@ canvas {
 
 .oct-btn:hover  { border-color: var(--accent); color: var(--accent); }
 .oct-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+/* ── Sustain pedal ───────────────────────────────────────────── */
+.sustain-wrap {
+  margin-top: var(--gap);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.sustain-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.sustain-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.sustain-status {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--text-disabled);
+  letter-spacing: 0.2em;
+}
+
+.sustain-status.active {
+  color: var(--accent);
+}

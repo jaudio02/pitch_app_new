@@ -121,20 +121,52 @@
   }
   document.addEventListener('mousedown',  ensureAudioUnlocked);
   document.addEventListener('touchstart', ensureAudioUnlocked, { passive: true });
+// ── Sustain pedal state ───────────────────────────────────────
+  let sustainOn  = false;
+  const heldNotes = new Set(); // notes kept alive by sustain
 
+  window.toggleSustain = function() {
+    sustainOn = !sustainOn;
+    const btn    = document.getElementById('sustainBtn');
+    const status = document.getElementById('sustainStatus');
+    btn.classList.toggle('active', sustainOn);
+    status.classList.toggle('active', sustainOn);
+    status.textContent = sustainOn ? 'ON' : 'OFF';
+
+    // Releasing pedal: stop all held notes immediately
+    if (!sustainOn) {
+      heldNotes.forEach(note => sampler.triggerRelease(note));
+      heldNotes.clear();
+    }
+  }
   // ── pianoPlay ─────────────────────────────────────────────────
   function pianoPlay(note, octave, btn) {
     const freq     = midiToFreq(noteToMidi(note, octave));
     const toneName = note + octave; // e.g. "C#3"
 
     if (samplerReady && sampler.loaded) {
-      sampler.triggerAttackRelease(toneName, '2n');
+      sampler.triggerAttack(toneName);
+      heldNotes.add(toneName);
+
+      // Release when mouse/touch lifts
+      const releaseNote = () => {
+        if (sustainOn) return; // sustain holds it — don't release yet
+        sampler.triggerRelease(toneName);
+        heldNotes.delete(toneName);
+        btn.classList.remove('playing');
+      };
+      btn.addEventListener('mouseup',    releaseNote, { once: true });
+      btn.addEventListener('mouseleave', releaseNote, { once: true });
+      btn.addEventListener('touchend',   releaseNote, { once: true });
     } else {
       oscFallback(freq);
     }
 
-    btn.classList.add('playing');
-    setTimeout(() => btn.classList.remove('playing'), 300);
+btn.classList.add('playing');
+    // visual class removed on release (handled above); fallback for osc path
+    if (!samplerReady || !sampler.loaded) {
+      setTimeout(() => btn.classList.remove('playing'), 300);
+    }
 
     renderPianoNote(note, octave, freq);
   }
