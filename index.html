@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Pitch Detector</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+  <header>
+    <div class="title">PITCH</div>
+    <div class="subtitle">Real-time detector</div>
+  </header>
+
+  <div class="pitch-card" id="pitchCard">
+    <div class="note-name silent" id="noteName">—<span class="note-octave" id="noteOctave"></span></div>
+    <div class="freq-row">
+      <div class="freq-value" id="freqValue">—</div>
+      <div class="freq-unit">HZ</div>
+    </div>
+  </div>
+
+  <div class="cents-section">
+    <div class="cents-label">
+      <span>♭ FLAT</span>
+      <span>CENTS DEVIATION</span>
+      <span>SHARP ♯</span>
+    </div>
+    <div class="cents-track">
+      <div class="cents-center"></div>
+      <div class="cents-needle silent" id="centsNeedle"></div>
+    </div>
+    <div class="cents-value" id="centsValue">— ¢</div>
+  </div>
+
+  <div class="meta-row">
+    <div class="meta-card">
+      <div class="meta-label">Volume</div>
+      <div class="vol-bar"><div class="vol-fill" id="volFill"></div></div>
+    </div>
+    <div class="meta-card">
+      <div class="meta-label">Clarity</div>
+      <div class="clarity-value" id="clarityValue">—</div>
+    </div>
+  </div>
+
+  <div class="waveform-card">
+    <canvas id="waveCanvas"></canvas>
+  </div>
+
+  <!-- Audio file upload -->
+  <div class="upload-wrap">
+    <span class="upload-label">Audio file</span>
+    <button class="upload-btn" onclick="document.getElementById('audioFileInput').click()">↑ Load MP3 / WAV</button>
+    <input id="audioFileInput" type="file" accept="audio/mp3,audio/wav,audio/*" style="display:none">
+    <span class="upload-filename" id="uploadFilename">No file loaded</span>
+  </div>
+
+  <!-- Playback controls -->
+  <div class="playback-wrap">
+    <button class="play-btn" id="playPauseBtn" disabled onclick="togglePlayback()">▶ Play</button>
+    <span class="playback-time" id="playbackTime">0:00 / 0:00</span>
+  </div>
+
+  <!-- Scrub bar -->
+  <div class="scrub-wrap">
+    <input type="range" class="scrub-slider" id="scrubSlider"
+           min="0" max="100" step="0.1" value="0" disabled>
+  </div>
+
+  <!-- A/B loop markers -->
+  <div class="ab-wrap">
+    <button class="ab-btn" id="setABtn"   disabled onclick="setLoopPoint('A')">Set A</button>
+    <button class="ab-btn" id="setBBtn"   disabled onclick="setLoopPoint('B')">Set B</button>
+    <div class="ab-display" id="abDisplay">A: <span>—</span> &nbsp; B: <span>—</span></div>
+    <button class="ab-clear" id="abClear" onclick="clearLoopPoints()">✕ clear</button>
+  </div>
+
+  <button class="start-btn" id="startBtn" onclick="startAudio()">▶ &nbsp; Start microphone</button>
+
+  <!-- Piano keyboard C4–C5 -->
+  <div class="piano-wrap">
+    <div class="piano-label">Keyboard — C4 to C5</div>
+    <div class="piano" id="pianoKeys"></div>
+  </div>
+
+  <div class="status">
+    <span class="dot" id="statusDot"></span>
+    <span id="statusText">Awaiting microphone access</span>
+  </div>
+</div>
+
+<!--
+  Script load order matters:
+  1. utils.js   — NOTE_NAMES, formatDuration (needed by everything)
+  2. pitch.js   — freqToNote, yin, rms (needed by main.js and ui.js)
+  3. ui.js      — renderPitchFrame, renderPianoNote (needed by main.js and keyboard.js)
+  4. audio.js   — audioFile, playback, loop engine (self-contained, needs utils)
+  5. keyboard.js — buildPiano IIFE (needs NOTE_NAMES, renderPianoNote)
+  6. main.js    — startAudio, mic loop (needs pitch.js, ui.js)
+-->
+<script src="js/utils.js"></script>
+<script src="js/pitch.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/keyboard.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
