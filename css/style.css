@@ -2,19 +2,35 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Design tokens ───────────────────────────────────────────── */
 :root {
-  --bg:     #f4f4f0;
-  --panel:  #ffffff;
-  --border: #d8d8d0;
-  --accent: #2563eb;
-  --dim:    #a0a09a;
-  --text:   #1a1a1a;
-  --muted:  #6b6b65;
+  /* Surfaces */
+  --bg:           #f0f0ec;   /* warm off-white page */
+  --panel:        #ffffff;   /* card surfaces */
+  --panel-alt:    #f7f7f4;   /* slightly tinted panel for variety */
+  --border:       #c8c8c0;   /* clear, visible borders */
+  --border-light: #e0e0d8;   /* dividers inside panels */
+
+  /* Accent */
+  --accent:       #1d4ed8;   /* primary blue — buttons, active states */
+  --accent-dim:   #3b6ee8;   /* lighter blue for outlines / labels */
+  --accent-bg:    #dbeafe;   /* very light blue for active fills */
+  --green:        #15803d;   /* in-tune indicator */
+
+  /* Typography hierarchy */
+  --text-primary:   #0f0f0f;   /* headings, values, main content */
+  --text-secondary: #2e2e2e;   /* body text, button labels */
+  --text-muted:     #5a5a52;   /* labels, captions — still readable */
+  --text-disabled:  #9a9a92;   /* genuinely inactive */
+
+  /* Spacing unit */
+  --gap: 2px;
 }
 
+/* ── Base ────────────────────────────────────────────────────── */
 body {
   background: var(--bg);
-  color: var(--text);
+  color: var(--text-primary);
   font-family: 'Space Mono', monospace;
   min-height: 100vh;
   display: flex;
@@ -25,7 +41,7 @@ body {
   padding: 40px 0 60px;
 }
 
-/* Grain overlay */
+/* Subtle grain — barely visible on light bg */
 body::before {
   content: '';
   position: fixed;
@@ -33,17 +49,18 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 100;
-  opacity: 0.15;
+  opacity: 0.12;
 }
 
 .wrapper {
   width: min(480px, 92vw);
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--gap);
   padding-bottom: env(safe-area-inset-bottom, 16px);
 }
 
+/* ── Header ──────────────────────────────────────────────────── */
 header {
   display: flex;
   justify-content: space-between;
@@ -60,7 +77,8 @@ header {
 
 .subtitle {
   font-size: 0.65rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -74,11 +92,12 @@ header {
   overflow: hidden;
 }
 
+/* Active accent bar along top edge */
 .pitch-card::after {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
@@ -87,23 +106,25 @@ header {
 
 .pitch-card.active::after { transform: scaleX(1); }
 
+/* Primary: the note letter itself */
 .note-name {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(5rem, 20vw, 9rem);
   line-height: 0.9;
-  color: var(--accent);
+  color: var(--text-primary);
   transition: color 0.1s;
   letter-spacing: -0.02em;
 }
 
-.note-name.silent { color: var(--dim); }
+.note-name.silent { color: var(--text-disabled); }
 
+/* Secondary: octave number, superscript */
 .note-octave {
   font-size: clamp(2rem, 8vw, 3.5rem);
-  color: var(--muted);
-  vertical-align: super;
   font-family: 'Space Mono', monospace;
   font-weight: 700;
+  color: var(--text-muted);
+  vertical-align: super;
 }
 
 .freq-row {
@@ -113,17 +134,20 @@ header {
   margin-top: 16px;
 }
 
+/* Primary: numeric frequency */
 .freq-value {
   font-size: 1.8rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-primary);
   letter-spacing: -0.02em;
   min-width: 100px;
 }
 
+/* Muted: unit label */
 .freq-unit {
   font-size: 0.7rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.15em;
 }
 
@@ -135,9 +159,11 @@ header {
   padding: 16px 32px 20px;
 }
 
+/* Muted: flat/sharp labels */
 .cents-label {
   font-size: 0.6rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -147,7 +173,7 @@ header {
 
 .cents-track {
   height: 4px;
-  background: var(--border);
+  background: var(--border-light);
   position: relative;
 }
 
@@ -158,7 +184,7 @@ header {
   transform: translateX(-50%);
   width: 1px;
   height: 12px;
-  background: var(--muted);
+  background: var(--border);
 }
 
 .cents-needle {
@@ -172,13 +198,15 @@ header {
   left: 50%;
 }
 
-.cents-needle.in-tune { background: #16a34a; }
-.cents-needle.silent  { background: var(--dim); }
+.cents-needle.in-tune { background: var(--green); }
+.cents-needle.silent  { background: var(--text-disabled); }
 
+/* Secondary: cents readout */
 .cents-value {
   text-align: center;
   font-size: 0.7rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-secondary);
   margin-top: 8px;
   letter-spacing: 0.1em;
 }
@@ -186,7 +214,7 @@ header {
 /* ── Volume / clarity ────────────────────────────────────────── */
 .meta-row {
   display: flex;
-  gap: 2px;
+  gap: var(--gap);
 }
 
 .meta-card {
@@ -197,9 +225,11 @@ header {
   padding: 14px 20px;
 }
 
+/* Muted: section label */
 .meta-label {
   font-size: 0.55rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 8px;
@@ -207,7 +237,7 @@ header {
 
 .vol-bar {
   height: 3px;
-  background: var(--border);
+  background: var(--border-light);
   position: relative;
   overflow: hidden;
 }
@@ -219,15 +249,16 @@ header {
   transition: width 0.05s ease;
 }
 
+/* Primary: clarity percentage */
 .clarity-value {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 /* ── Waveform canvas ─────────────────────────────────────────── */
 .waveform-card {
-  background: var(--panel);
+  background: var(--panel-alt);
   border: 1px solid var(--border);
   border-top: none;
 }
@@ -241,27 +272,30 @@ canvas {
 /* ── Start microphone button ─────────────────────────────────── */
 .start-btn {
   width: 100%;
-  background: transparent;
+  background: var(--accent);
   border: 1px solid var(--accent);
-  color: var(--accent);
+  color: #ffffff;
   font-family: 'Space Mono', monospace;
   font-size: 0.75rem;
+  font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   padding: 16px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-  margin-top: 2px;
+  transition: background 0.15s, border-color 0.15s;
+  margin-top: var(--gap);
 }
 
-.start-btn:hover { background: var(--accent); color: #ffffff; }
-.start-btn:disabled { border-color: var(--dim); color: var(--dim); cursor: default; }
-.start-btn:disabled:hover { background: transparent; color: var(--dim); }
+.start-btn:hover { background: #1e40af; border-color: #1e40af; }
+.start-btn:disabled { background: transparent; border-color: var(--text-disabled); color: var(--text-disabled); cursor: default; }
+.start-btn:disabled:hover { background: transparent; border-color: var(--text-disabled); }
 
+/* Muted: status line below button */
 .status {
   text-align: center;
   font-size: 0.6rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.15em;
   margin-top: 14px;
 }
@@ -270,29 +304,31 @@ canvas {
   display: inline-block;
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--muted);
+  background: var(--text-disabled);
   margin-right: 6px;
   vertical-align: middle;
 }
 
-.dot.live { background: #16a34a; animation: pulse 1.2s infinite; }
+.dot.live { background: var(--green); animation: pulse 1.2s infinite; }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50%       { opacity: 0.3; }
 }
 
 /* ── Piano keyboard ──────────────────────────────────────────── */
 .piano-wrap {
-  margin-top: 2px;
+  margin-top: var(--gap);
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 20px 16px 16px;
 }
 
+/* Muted: section label */
 .piano-label {
   font-size: 0.55rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   margin-bottom: 14px;
@@ -312,32 +348,34 @@ canvas {
   outline: none;
 }
 
+/* White keys */
 .key.white {
   flex: 1;
-  background: #f9f9f6;
-  border: 1px solid #c0c0b8;
+  background: #fafaf8;
+  border: 1px solid #b8b8b0;
   border-radius: 0 0 4px 4px;
   z-index: 1;
 }
 
-.key.white:hover   { background: #eeeee8; }
-.key.white:active  { background: #bfdbfe; transform: scaleY(1.03); transform-origin: top; }
-.key.white.playing { background: #bfdbfe; }
+.key.white:hover   { background: #efefea; }
+.key.white:active  { background: var(--accent-bg); transform: scaleY(1.03); transform-origin: top; }
+.key.white.playing { background: var(--accent-bg); }
 
+/* Black keys — always dark so they read on a white keyboard */
 .key.black {
   position: absolute;
   width: 7%;
   height: 58%;
-  background: #1e1e2a;
+  background: #181820;
   border: 1px solid #000;
   border-radius: 0 0 3px 3px;
   z-index: 2;
   top: 0;
 }
 
-.key.black:hover   { background: #2e2e3e; }
-.key.black:active  { background: #1d4ed8; }
-.key.black.playing { background: #1d4ed8; }
+.key.black:hover   { background: #28283a; }
+.key.black:active  { background: var(--accent); }
+.key.black.playing { background: var(--accent); }
 
 .key-label {
   position: absolute;
@@ -346,17 +384,17 @@ canvas {
   transform: translateX(-50%);
   font-family: 'Space Mono', monospace;
   font-size: 0.45rem;
-  color: var(--muted);
+  font-weight: 700;
   pointer-events: none;
   white-space: nowrap;
 }
 
-.key.white .key-label { color: #888; }
-.key.black .key-label { color: #555; }
+.key.white .key-label { color: #888880; }
+.key.black .key-label { color: #909090; }
 
 /* ── Audio file upload ───────────────────────────────────────── */
 .upload-wrap {
-  margin-top: 2px;
+  margin-top: var(--gap);
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 16px 20px;
@@ -367,9 +405,11 @@ canvas {
   min-width: 0;
 }
 
+/* Muted: section label */
 .upload-label {
   font-size: 0.55rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -377,10 +417,11 @@ canvas {
 
 .upload-btn {
   background: transparent;
-  border: 1px solid var(--dim);
-  color: var(--text);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.15em;
   padding: 8px 14px;
   cursor: pointer;
@@ -391,9 +432,11 @@ canvas {
 
 .upload-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+/* Secondary: loaded filename */
 .upload-filename {
   font-size: 0.6rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -404,7 +447,7 @@ canvas {
 
 /* ── Playback controls ───────────────────────────────────────── */
 .playback-wrap {
-  margin-top: 2px;
+  margin-top: var(--gap);
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 16px 20px;
@@ -419,6 +462,7 @@ canvas {
   color: var(--accent);
   font-family: 'Space Mono', monospace;
   font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.15em;
   padding: 9px 18px;
   cursor: pointer;
@@ -428,19 +472,21 @@ canvas {
 }
 
 .play-btn:hover  { background: var(--accent); color: #ffffff; }
-.play-btn:disabled { border-color: var(--dim); color: var(--dim); cursor: default; }
-.play-btn:disabled:hover { background: transparent; color: var(--dim); }
+.play-btn:disabled { border-color: var(--text-disabled); color: var(--text-disabled); cursor: default; }
+.play-btn:disabled:hover { background: transparent; color: var(--text-disabled); }
 
+/* Secondary: time readout */
 .playback-time {
   font-size: 0.65rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-secondary);
   letter-spacing: 0.1em;
   min-width: 90px;
 }
 
 /* ── Scrub bar ───────────────────────────────────────────────── */
 .scrub-wrap {
-  margin-top: 2px;
+  margin-top: var(--gap);
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 14px 20px;
@@ -458,26 +504,29 @@ canvas {
 }
 
 .scrub-slider:disabled {
-  opacity: 0.3;
+  opacity: 0.35;
   cursor: default;
 }
 
 .scrub-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px var(--accent);
 }
 
 .scrub-slider:disabled::-webkit-slider-thumb {
-  background: var(--muted);
+  background: var(--text-disabled);
+  box-shadow: 0 0 0 1px var(--text-disabled);
 }
 
 /* ── A/B loop markers ────────────────────────────────────────── */
 .ab-wrap {
-  margin-top: 2px;
+  margin-top: var(--gap);
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 14px 20px;
@@ -489,43 +538,51 @@ canvas {
 
 .ab-btn {
   background: transparent;
-  border: 1px solid var(--dim);
-  color: var(--text);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
+  font-weight: 700;
   letter-spacing: 0.15em;
   padding: 7px 14px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
   flex-shrink: 0;
 }
 
 .ab-btn:hover    { border-color: var(--accent); color: var(--accent); }
-.ab-btn:disabled { border-color: var(--dim); color: var(--dim); cursor: default; }
-.ab-btn:disabled:hover { border-color: var(--dim); color: var(--dim); }
+.ab-btn:disabled { border-color: var(--border-light); color: var(--text-disabled); cursor: default; }
+.ab-btn:disabled:hover { border-color: var(--border-light); color: var(--text-disabled); background: transparent; }
 
-.ab-btn.set { border-color: var(--accent); color: var(--accent); }
+/* Active state: set point */
+.ab-btn.set { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 
+/* Secondary: A/B time display */
 .ab-display {
   font-size: 0.6rem;
-  color: var(--muted);
+  font-weight: 700;
+  color: var(--text-muted);
   letter-spacing: 0.1em;
   flex: 1;
   min-width: 0;
 }
 
-.ab-display span { color: var(--text); }
+/* Primary: the actual timestamp values */
+.ab-display span { color: var(--text-primary); }
 
+/* Muted: clear button */
 .ab-clear {
   background: transparent;
   border: none;
-  color: var(--muted);
+  color: var(--text-muted);
   font-family: 'Space Mono', monospace;
   font-size: 0.6rem;
+  font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.1em;
   padding: 4px;
   flex-shrink: 0;
+  transition: color 0.15s;
 }
 
 .ab-clear:hover { color: var(--accent); }
