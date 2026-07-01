@@ -80,12 +80,23 @@
 
   <button class="start-btn" id="startBtn" onclick="startAudio()">▶ &nbsp; Start microphone</button>
 
-  <!-- Piano keyboard C4–C5 -->
+<!-- Piano keyboard -->
   <div class="piano-wrap">
-  <div class="piano-label">Keyboard — C3 to C5</div>
+    <div class="piano-header">
+      <span class="piano-label">Keyboard</span>
+      <div class="octave-switcher">
+        <button class="oct-btn active" data-octave="3">C3–C4</button>
+        <button class="oct-btn" data-octave="4">C4–C5</button>
+      </div>
+    </div>
     <div class="piano" id="pianoKeys"></div>
   </div>
 
+  <div class="status">
+    <span class="dot" id="statusDot"></span>
+    <span id="statusText">Awaiting microphone access</span>
+  </div>
+</div>
   <div class="status">
     <span class="dot" id="statusDot"></span>
     <span id="statusText">Awaiting microphone access</span>

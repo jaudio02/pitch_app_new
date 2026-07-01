@@ -586,3 +586,31 @@ canvas {
 }
 
 .ab-clear:hover { color: var(--accent); }
+/* ── Octave switcher ─────────────────────────────────────────── */
+.piano-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.octave-switcher {
+  display: flex;
+  gap: 4px;
+}
+
+.oct-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.oct-btn:hover  { border-color: var(--accent); color: var(--accent); }
+.oct-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
