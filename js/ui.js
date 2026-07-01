@@ -50,7 +50,7 @@ function renderPitchFrame({ timeDomain, freq, clarity, vol, sampleRate, canvas, 
   const W = canvas.width, H = canvas.height;
   canvasCtx.clearRect(0, 0, W, H);
   canvasCtx.beginPath();
-  canvasCtx.strokeStyle = isSilent ? '#1e1e2e' : '#e8ff47';
+  canvasCtx.strokeStyle = isSilent ? '#d8d8d0' : '#2563eb';
   canvasCtx.lineWidth = devicePixelRatio * 1.5;
   const step = W / timeDomain.length;
   for (let i = 0; i < timeDomain.length; i++) {

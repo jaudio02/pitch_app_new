@@ -3,12 +3,13 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #0a0a0f;
-  --border: #1e1e2e;
-  --accent: #e8ff47;
-  --dim: #3a3a50;
-  --text: #c8c8e0;
-  --muted: #555570;
+  --bg:     #f4f4f0;
+  --panel:  #ffffff;
+  --border: #d8d8d0;
+  --accent: #2563eb;
+  --dim:    #a0a09a;
+  --text:   #1a1a1a;
+  --muted:  #6b6b65;
 }
 
 body {
@@ -32,7 +33,7 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 100;
-  opacity: 0.4;
+  opacity: 0.15;
 }
 
 .wrapper {
@@ -171,7 +172,7 @@ header {
   left: 50%;
 }
 
-.cents-needle.in-tune { background: #47ff8a; }
+.cents-needle.in-tune { background: #16a34a; }
 .cents-needle.silent  { background: var(--dim); }
 
 .cents-value {
@@ -253,7 +254,7 @@ canvas {
   margin-top: 2px;
 }
 
-.start-btn:hover { background: var(--accent); color: var(--bg); }
+.start-btn:hover { background: var(--accent); color: #ffffff; }
 .start-btn:disabled { border-color: var(--dim); color: var(--dim); cursor: default; }
 .start-btn:disabled:hover { background: transparent; color: var(--dim); }
 
@@ -274,7 +275,7 @@ canvas {
   vertical-align: middle;
 }
 
-.dot.live { background: #47ff8a; animation: pulse 1.2s infinite; }
+.dot.live { background: #16a34a; animation: pulse 1.2s infinite; }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
@@ -311,34 +312,32 @@ canvas {
   outline: none;
 }
 
-/* White keys */
 .key.white {
   flex: 1;
-  background: #e8e8d8;
-  border: 1px solid #aaa;
+  background: #f9f9f6;
+  border: 1px solid #c0c0b8;
   border-radius: 0 0 4px 4px;
   z-index: 1;
 }
 
-.key.white:hover   { background: #ffffee; }
-.key.white:active  { background: var(--accent); transform: scaleY(1.03); transform-origin: top; }
-.key.white.playing { background: var(--accent); }
+.key.white:hover   { background: #eeeee8; }
+.key.white:active  { background: #bfdbfe; transform: scaleY(1.03); transform-origin: top; }
+.key.white.playing { background: #bfdbfe; }
 
-/* Black keys */
 .key.black {
   position: absolute;
   width: 7%;
   height: 58%;
-  background: #1a1a24;
+  background: #1e1e2a;
   border: 1px solid #000;
   border-radius: 0 0 3px 3px;
   z-index: 2;
   top: 0;
 }
 
-.key.black:hover   { background: #2e2e40; }
-.key.black:active  { background: #b8cc30; }
-.key.black.playing { background: #b8cc30; }
+.key.black:hover   { background: #2e2e3e; }
+.key.black:active  { background: #1d4ed8; }
+.key.black.playing { background: #1d4ed8; }
 
 .key-label {
   position: absolute;
@@ -428,7 +427,7 @@ canvas {
   text-align: center;
 }
 
-.play-btn:hover  { background: var(--accent); color: var(--bg); }
+.play-btn:hover  { background: var(--accent); color: #ffffff; }
 .play-btn:disabled { border-color: var(--dim); color: var(--dim); cursor: default; }
 .play-btn:disabled:hover { background: transparent; color: var(--dim); }
 
