@@ -3,7 +3,7 @@
 // waveform canvas, and status indicator.
 
 // Called each animation frame by the mic loop in main.js
-function renderPitchFrame({ timeDomain, freq, clarity, vol, sampleRate, canvas, ctx: canvasCtx }) {
+function renderPitchFrame({ timeDomain, freq, clarity, vol, sampleRate }) {
   const SILENCE_THRESHOLD = 0.01;
   const CLARITY_THRESHOLD = 0.85;
 
@@ -36,22 +36,8 @@ function renderPitchFrame({ timeDomain, freq, clarity, vol, sampleRate, canvas, 
     const inTune = Math.abs(note.cents) <= 5;
     centsNeedle.style.left = pct + '%';
     centsNeedle.className = 'cents-needle' + (inTune ? ' in-tune' : '');
-    centsValue.textContent = (note.cents >= 0 ? '+' : '') + note.cents + ' ¢';
+ centsValue.textContent = (note.cents >= 0 ? '+' : '') + note.cents + ' ¢';
   }
-
-  // Waveform
-  const W = canvas.width, H = canvas.height;
-  canvasCtx.clearRect(0, 0, W, H);
-  canvasCtx.beginPath();
-  canvasCtx.strokeStyle = isSilent ? '#d8d8d0' : '#2563eb';
-  canvasCtx.lineWidth = devicePixelRatio * 1.5;
-  const step = W / timeDomain.length;
-  for (let i = 0; i < timeDomain.length; i++) {
-    const x = i * step;
-    const y = (1 - (timeDomain[i] * 0.7 + 1) / 2) * H;
-    i === 0 ? canvasCtx.moveTo(x, y) : canvasCtx.lineTo(x, y);
-  }
-  canvasCtx.stroke();
 }
 
 // Update the pitch card and freq display from a piano key press

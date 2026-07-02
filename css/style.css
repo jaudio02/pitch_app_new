@@ -211,18 +211,7 @@ header {
   letter-spacing: 0.1em;
 }
 
-/* ── Waveform canvas ─────────────────────────────────────────── */
-.waveform-card {
-  background: var(--panel-alt);
-  border: 1px solid var(--border);
-  border-top: none;
-}
 
-canvas {
-  display: block;
-  width: 100%;
-  height: 64px;
-}
 
 /* ── Start microphone button ─────────────────────────────────── */
 .start-btn {
