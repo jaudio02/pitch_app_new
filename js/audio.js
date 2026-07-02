@@ -131,8 +131,8 @@ function stopClock() {
 }
 
 function updatePlaybackTime(elapsed) {
-  document.getElementById('playbackTime').textContent =
-    formatDuration(elapsed) + ' / ' + formatDuration(audioFile.duration);
+  document.getElementById('scrubTimeCurrent').textContent = formatDuration(elapsed);
+  document.getElementById('scrubTimeDuration').textContent = formatDuration(audioFile.duration);
 }
 
 // ── Scrub bar ─────────────────────────────────────────────────

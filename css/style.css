@@ -431,13 +431,7 @@ canvas {
 .play-btn:disabled:hover { background: transparent; color: var(--text-disabled); }
 
 /* Secondary: time readout */
-.playback-time {
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--text-secondary);
-  letter-spacing: 0.1em;
-  min-width: 90px;
-}
+
 
 /* ── Scrub bar ───────────────────────────────────────────────── */
 .scrub-wrap {
@@ -445,6 +439,19 @@ canvas {
   background: var(--panel);
   border: 1px solid var(--border);
   padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scrub-time {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .scrub-slider {

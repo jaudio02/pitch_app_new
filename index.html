@@ -47,16 +47,17 @@
     <span class="upload-filename" id="uploadFilename">No file loaded</span>
   </div>
 
-  <!-- Playback controls -->
+<!-- Playback controls -->
   <div class="playback-wrap">
     <button class="play-btn" id="playPauseBtn" disabled onclick="togglePlayback()">▶ Play</button>
-    <span class="playback-time" id="playbackTime">0:00 / 0:00</span>
   </div>
 
-  <!-- Scrub bar -->
+  <!-- Scrub bar with inline time display -->
   <div class="scrub-wrap">
+    <span class="scrub-time" id="scrubTimeCurrent">0:00</span>
     <input type="range" class="scrub-slider" id="scrubSlider"
            min="0" max="100" step="0.1" value="0" disabled>
+    <span class="scrub-time" id="scrubTimeDuration">0:00</span>
   </div>
 
   <!-- A/B loop markers -->
