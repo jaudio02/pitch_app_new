@@ -144,29 +144,30 @@
     const freq     = midiToFreq(noteToMidi(note, octave));
     const toneName = note + octave; // e.g. "C#3"
 
-    if (samplerReady && sampler.loaded) {
+if (samplerReady && sampler.loaded) {
       sampler.triggerAttack(toneName);
       heldNotes.add(toneName);
 
-      // Release when mouse/touch lifts
-      const releaseNote = () => {
-        if (sustainOn) return; // sustain holds it — don't release yet
-        sampler.triggerRelease(toneName);
-        heldNotes.delete(toneName);
-        btn.classList.remove('playing');
+      // Audio release — sustain determines whether sound stops
+      const releaseAudio = () => {
+        if (!sustainOn) {
+          sampler.triggerRelease(toneName);
+          heldNotes.delete(toneName);
+        }
       };
-      btn.addEventListener('mouseup',    releaseNote, { once: true });
-      btn.addEventListener('mouseleave', releaseNote, { once: true });
-      btn.addEventListener('touchend',   releaseNote, { once: true });
+      btn.addEventListener('mouseup',    releaseAudio, { once: true });
+      btn.addEventListener('mouseleave', releaseAudio, { once: true });
+      btn.addEventListener('touchend',   releaseAudio, { once: true });
     } else {
       oscFallback(freq);
     }
 
-btn.classList.add('playing');
-    // visual class removed on release (handled above); fallback for osc path
-    if (!samplerReady || !sampler.loaded) {
-      setTimeout(() => btn.classList.remove('playing'), 300);
-    }
+// Visual feedback — always immediate, never affected by sustain
+    btn.classList.add('playing');
+    const removeVisual = () => btn.classList.remove('playing');
+    btn.addEventListener('mouseup',    removeVisual, { once: true });
+    btn.addEventListener('mouseleave', removeVisual, { once: true });
+    btn.addEventListener('touchend',   removeVisual, { once: true });
 
     renderPianoNote(note, octave, freq);
   }
