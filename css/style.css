@@ -87,7 +87,7 @@ header {
 .pitch-card {
   background: var(--panel);
   border: 1px solid var(--border);
-  padding: 40px 32px 32px;
+  padding: 26px 32px 20px;    /* was 40px 32px 32px */
   position: relative;
   overflow: hidden;
 }
@@ -109,7 +109,7 @@ header {
 /* Primary: the note letter itself */
 .note-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(5rem, 20vw, 9rem);
+  font-size: clamp(3.2rem, 13vw, 6rem);    /* was clamp(5rem, 20vw, 9rem) */
   line-height: 0.9;
   color: var(--text-primary);
   transition: color 0.1s;
