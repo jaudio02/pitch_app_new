@@ -133,12 +133,13 @@
     status.classList.toggle('active', sustainOn);
     status.textContent = sustainOn ? 'ON' : 'OFF';
 
-    // Releasing pedal: stop all held notes immediately
+ // Releasing pedal: stop all held notes immediately
     if (!sustainOn) {
       heldNotes.forEach(note => sampler.triggerRelease(note));
       heldNotes.clear();
     }
   }
+  document.getElementById('sustainBtn').addEventListener('click', toggleSustain);
   // ── pianoPlay ─────────────────────────────────────────────────
   function pianoPlay(note, octave, btn) {
     const freq     = midiToFreq(noteToMidi(note, octave));

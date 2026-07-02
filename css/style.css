@@ -549,6 +549,12 @@ canvas {
   margin-bottom: 14px;
 }
 
+.piano-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .octave-switcher {
   display: flex;
   gap: 4px;
@@ -570,15 +576,7 @@ canvas {
 .oct-btn:hover  { border-color: var(--accent); color: var(--accent); }
 .oct-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 /* ── Sustain pedal ───────────────────────────────────────────── */
-.sustain-wrap {
-  margin-top: var(--gap);
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+
 
 .sustain-btn {
   background: transparent;
