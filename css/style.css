@@ -211,51 +211,6 @@ header {
   letter-spacing: 0.1em;
 }
 
-/* ── Volume / clarity ────────────────────────────────────────── */
-.meta-row {
-  display: flex;
-  gap: var(--gap);
-}
-
-.meta-card {
-  flex: 1;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-top: none;
-  padding: 14px 20px;
-}
-
-/* Muted: section label */
-.meta-label {
-  font-size: 0.55rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.vol-bar {
-  height: 3px;
-  background: var(--border-light);
-  position: relative;
-  overflow: hidden;
-}
-
-.vol-fill {
-  height: 100%;
-  background: var(--accent);
-  width: 0%;
-  transition: width 0.05s ease;
-}
-
-/* Primary: clarity percentage */
-.clarity-value {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
 /* ── Waveform canvas ─────────────────────────────────────────── */
 .waveform-card {
   background: var(--panel-alt);

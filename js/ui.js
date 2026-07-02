@@ -11,16 +11,9 @@ function renderPitchFrame({ timeDomain, freq, clarity, vol, sampleRate, canvas, 
   const freqValue   = document.getElementById('freqValue');
   const centsNeedle = document.getElementById('centsNeedle');
   const centsValue  = document.getElementById('centsValue');
-  const volFill     = document.getElementById('volFill');
-  const clarityVal  = document.getElementById('clarityValue');
   const pitchCard   = document.getElementById('pitchCard');
 
-  // Volume bar
-  const volPct = Math.min(100, vol * 400);
-  volFill.style.width = volPct + '%';
-
-  // Clarity readout
-  clarityVal.textContent = clarity > 0 ? (clarity * 100).toFixed(0) + '%' : '—';
+ 
 
   const isSilent = vol < SILENCE_THRESHOLD || clarity < CLARITY_THRESHOLD || freq < 0;
 
