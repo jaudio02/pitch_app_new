@@ -92,7 +92,7 @@ function playAudioFile() {
     if (playback.isPlaying) stopAudioFile();
   };
 
-  document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+  document.getElementById('playPauseBtn').textContent = '⏸';
   startClock();
 }
 
@@ -102,7 +102,7 @@ function pauseAudioFile() {
   audioFile.source.onended = null;  // prevent stopAudioFile firing
   audioFile.source.stop();
   playback.isPlaying = false;
-  document.getElementById('playPauseBtn').textContent = '▶ Play';
+document.getElementById('playPauseBtn').textContent = '▶';
   stopClock();
 }
 
@@ -110,7 +110,7 @@ function stopAudioFile() {
   playback.isPlaying = false;
   playback.pausedAt  = 0;
   if (audioFile.source) { audioFile.source.onended = null; audioFile.source.stop(); }
-  document.getElementById('playPauseBtn').textContent = '▶ Play';
+document.getElementById('playPauseBtn').textContent = '▶';
   stopClock();
   updatePlaybackTime(0);
 }
