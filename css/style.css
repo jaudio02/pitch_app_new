@@ -544,6 +544,7 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex: 1;
 }
 
 .octave-switcher {
@@ -564,7 +565,7 @@ header {
 }
 
 .oct-btn:hover  { border-color: var(--accent); color: var(--accent); }
-.oct-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.oct-btn:active { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
 /* ── Sustain pedal ───────────────────────────────────────────── */
 
 

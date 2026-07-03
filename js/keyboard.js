@@ -68,11 +68,7 @@
       if (octave === currentOctave) return;
       currentOctave = octave;
 
-      // Update active state
-      document.querySelectorAll('.oct-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      renderKeys(currentOctave);
+renderKeys(currentOctave);
     });
   });
 
