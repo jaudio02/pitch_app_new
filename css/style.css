@@ -569,33 +569,24 @@ header {
 /* ── Sustain pedal ───────────────────────────────────────────── */
 
 
-.sustain-btn {
+.sustain-icon-btn {
   background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-family: 'Space Mono', monospace;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  padding: 8px 16px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 4px;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  line-height: 0;
+  transition: border-color 0.15s;
   flex-shrink: 0;
 }
 
-.sustain-btn.active {
+.sustain-icon-btn.active {
   border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-bg);
 }
 
-.sustain-status {
-  font-size: 0.6rem;
-  font-weight: 700;
-  color: var(--text-disabled);
-  letter-spacing: 0.2em;
-}
-
-.sustain-status.active {
-  color: var(--accent);
+.sustain-icon-img {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }

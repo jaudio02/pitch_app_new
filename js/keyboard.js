@@ -125,13 +125,10 @@
   let sustainOn  = false;
   const heldNotes = new Set(); // notes kept alive by sustain
 
-  window.toggleSustain = function() {
+window.toggleSustain = function() {
     sustainOn = !sustainOn;
-    const btn    = document.getElementById('sustainBtn');
-    const status = document.getElementById('sustainStatus');
+    const btn = document.getElementById('sustainBtn');
     btn.classList.toggle('active', sustainOn);
-    status.classList.toggle('active', sustainOn);
-    status.textContent = sustainOn ? 'ON' : 'OFF';
 
  // Releasing pedal: stop all held notes immediately
     if (!sustainOn) {
