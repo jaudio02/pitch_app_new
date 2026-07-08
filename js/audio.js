@@ -232,11 +232,8 @@ function clearLoopPoints() {
 }
 
 function updateAbDisplay() {
-  const aText = loop.A !== null ? formatDuration(loop.A) : '—';
-  const bText = loop.B !== null ? formatDuration(loop.B) : '—';
-  const spans = document.getElementById('abDisplay').querySelectorAll('span');
-  spans[0].textContent = aText;
-  spans[1].textContent = bText;
+  // Readout removed from UI — loop.A / loop.B state is still tracked
+  // and used by the loop engine below; this function is now a no-op.
 }
 
 // Enable A/B buttons when a file is loaded (piggyback on upload event)
