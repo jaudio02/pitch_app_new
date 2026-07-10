@@ -86,14 +86,19 @@
     <div class="piano" id="pianoKeys"></div>
   </div>
 
-  <div class="status">
+<div class="status">
     <span class="dot" id="statusDot"></span>
     <span id="statusText">Awaiting microphone access</span>
   </div>
 </div>
-  <div class="status">
-    <span class="dot" id="statusDot"></span>
-    <span id="statusText">Awaiting microphone access</span>
+
+<!-- Microphone selection modal -->
+<div class="modal-overlay" id="micModalOverlay" hidden>
+  <div class="modal-card">
+    <div class="modal-title">Select microphone</div>
+    <div class="modal-sub">Choose which input to use</div>
+    <div class="mic-list" id="micList"></div>
+    <button class="modal-close-btn" id="micModalCloseBtn">Cancel</button>
   </div>
 </div>
 
