@@ -345,18 +345,8 @@ header {
   display: flex;
   align-items: center;
   gap: 16px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   min-width: 0;
-}
-
-/* Muted: section label */
-.upload-label {
-  font-size: 0.55rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .upload-btn {
@@ -377,6 +367,7 @@ header {
 .upload-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 /* Secondary: loaded filename */
+/* Secondary: loaded filename */
 .upload-filename {
   font-size: 0.6rem;
   font-weight: 700;
@@ -386,7 +377,6 @@ header {
   white-space: nowrap;
   flex: 1;
   min-width: 0;
-  max-width: 100%;
 }
 
 /* ── Scrub bar + playback control ──────────────────────────────── */
@@ -492,8 +482,8 @@ header {
 
 .scrub-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
