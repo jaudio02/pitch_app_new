@@ -232,8 +232,22 @@ function clearLoopPoints() {
 }
 
 function updateAbDisplay() {
-  // Readout removed from UI — loop.A / loop.B state is still tracked
-  // and used by the loop engine below; this function is now a no-op.
+  const markerA = document.getElementById('loopMarkerA');
+  const markerB = document.getElementById('loopMarkerB');
+
+  if (loop.A !== null && audioFile.duration > 0) {
+    markerA.style.left = (loop.A / audioFile.duration) * 100 + '%';
+    markerA.hidden = false;
+  } else {
+    markerA.hidden = true;
+  }
+
+  if (loop.B !== null && audioFile.duration > 0) {
+    markerB.style.left = (loop.B / audioFile.duration) * 100 + '%';
+    markerB.hidden = false;
+  } else {
+    markerB.hidden = true;
+  }
 }
 
 // Enable A/B buttons when a file is loaded (piggyback on upload event)

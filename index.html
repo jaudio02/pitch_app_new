@@ -46,10 +46,14 @@
 
 <!-- Scrub bar with playback control underneath -->
   <div class="scrub-wrap">
-    <div class="scrub-row">
+<div class="scrub-row">
       <span class="scrub-time" id="scrubTimeCurrent">0:00</span>
-      <input type="range" class="scrub-slider" id="scrubSlider"
-             min="0" max="100" step="0.1" value="0" disabled>
+      <div class="scrub-slider-wrap">
+        <input type="range" class="scrub-slider" id="scrubSlider"
+               min="0" max="100" step="0.1" value="0" disabled>
+        <div class="loop-marker" id="loopMarkerA" hidden>A</div>
+        <div class="loop-marker" id="loopMarkerB" hidden>B</div>
+      </div>
       <span class="scrub-time" id="scrubTimeDuration">0:00</span>
     </div>
     <button class="play-btn" id="playPauseBtn" disabled onclick="togglePlayback()">▶</button>
