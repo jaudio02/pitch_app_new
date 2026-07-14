@@ -109,7 +109,7 @@ header {
 /* Primary: the note letter itself */
 .note-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3.2rem, 13vw, 6rem);    /* was clamp(5rem, 20vw, 9rem) */
+  font-size: clamp(2.24rem, 9.1vw, 4.2rem);    /* ~30% smaller than clamp(3.2rem, 13vw, 6rem) */
   line-height: 0.9;
   color: var(--text-primary);
   transition: color 0.1s;
@@ -168,6 +168,7 @@ header {
   text-transform: uppercase;
   margin-bottom: 10px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
